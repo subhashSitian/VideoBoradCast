@@ -1,0 +1,80 @@
+<html>
+<head>
+	<title>Video BroadCast App</title>
+	<link href="http://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+	<link href="/style.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="/socket.io/socket.io.js"></script>
+
+	
+</head>
+	<body>
+
+
+
+	<h1 class="title">LIVE : Video Broadcast </h1>
+	<div id="homepage">
+		<img src="<%=user.thumbnail%>" />
+		<h1> Welcome ,<span style="color:red"><%= user.userName %></span></h1>
+		<input type="hidden" id ="path"/>
+		<img id="img" src="" />
+		<div id="oauthOption">
+			
+			<div id="main-container">
+						<a href="/api/logout"> Logout</a>
+							<nav>
+								<div id="img">
+									<img id="imgStream" src="" />
+								</div>
+
+								<!-- Direct from Node by pasing the Server URL....
+					    		  -->
+								<video id="vid" width="780" autoplay playsinline loop preload controls>
+					     			<source src="http://localhost:4000/api/getFile" type="video/mp4">
+					    		 </video>
+
+							</nav>
+							<br/>
+							<nav>
+								<form action="/api/upload" method="POST" enctype="multipart/form-data">
+							          <div class="custom-file mb-3">
+							            <input type="file" name="file" id="file" class="custom-file-input">
+							            <label for="file" class="custom-file-label">Choose File</label>
+							          </div>
+							          <input type="submit" value="Submit" class="btn btn-primary btn-block">
+							    </form>
+
+							</nav>
+					     </div>
+					     
+			</div>
+		</div>
+		<script src="/client.js"></script> 
+		<!-- <script type= "text/javascript">
+				
+				var socket = io.connect('http://localhost:4000');
+				var videoDiv = document.getElementById('video');
+				var data ="video.mp4";
+
+				socket.emit('video',data);
+
+				var imgChuncks =[];
+				
+				socket.on('video',function(data){
+						videoDiv.innerHTML ='<video id="videoId" width="780" autoplay playsinline loop preload controls><source src="'+data+'" type="video/mp4"></video> ';
+				});
+
+				socket.on('img-chunk',function(chunk){
+						var img =document.getElementById('img');
+						imgChuncks.push(chunk);
+						alert(imgChuncks);
+						img.setAttribute('src','data:image/jpeg;base64,'+ window.btoa(imgChuncks));
+
+					});
+
+		</script> -->
+
+	</body>
+</html>
+
+
